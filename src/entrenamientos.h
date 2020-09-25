@@ -6,6 +6,9 @@ struct entrenamientos
     fecha fechaEntrenamiento;
     float calorias;
 };
+
+static const char *PATH_ENTRENAMIENTOS = "../datos/entrenamientos.dat";
+
 enum actividad
 {
     caminata = 1,
@@ -29,4 +32,3 @@ const char* nombreActividad(int actividad);
 
 entrenamientos leerEntrenamientos(int pos);
 int buscarEntrenamiento(int id);
-int cantidadEntrenamientos();

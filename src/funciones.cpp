@@ -14,3 +14,16 @@ void exito (const char*mensaje){
     cout << ">"<<mensaje<<endl;
     setColor(WHITE);
 }
+
+int contarRegistros(const char *archivo, long tamanio){
+    FILE *p;
+    p = fopen(archivo, "rb");
+    if (p==NULL){
+        return 0;
+    }
+    long bytes;
+    fseek(p, 0, 2);
+    bytes = ftell(p);
+    fclose(p);
+    return bytes/tamanio;
+}

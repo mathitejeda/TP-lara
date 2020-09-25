@@ -4,13 +4,11 @@
 #include "funciones.h"
 #include "fecha.h"
 #include "rlutil.h"
-const char *PATH_ENTRENAMIENTOS = "../datos/entrenamientos.dat";
-
 //creacion
 
 bool cargarEntrenamiento(entrenamientos *ref)
 {
-    ref->ID = cantidadEntrenamientos();
+    ref->ID = contarRegistros(PATH_ENTRENAMIENTOS,sizeof(entrenamientos)) +1 ;
     std::cout << "Ingrese el id de usuario";
     std::cin >> ref->IDusuario;
     while (buscarUsuario(ref->IDusuario) < 0)
@@ -102,14 +100,14 @@ void nuevoEntrenamiento()
 void listarEntrenamiento(entrenamientos mostrar)
 {
     std::cout << "#ID: " << mostrar.ID << std::endl;
-    std::cout << "#ID del Usuario: " << mostrar.ID << std::endl;
+    std::cout << "#ID usuario: " << mostrar.IDusuario << std::endl;
     std::cout << "+ Fecha de entrenamiento: " << std::endl;
     mostrar.fechaEntrenamiento.mostrarFecha();
     std::cout<<std::endl;
     std::cout << "+ Actividad: " << nombreActividad(mostrar.actividad);
     std::cout << std::endl;
     std::cout << "+ Calorias quemadas: " << mostrar.calorias << std::endl;
-    std::cout << "+ Tiempo: " << mostrar.tiempo << "Minutos" << std::endl;
+    std::cout << "+ Tiempo: " << mostrar.tiempo << " Minutos" << std::endl;
 }
 
 void listarEntrenamientoPorID(int id)
@@ -144,12 +142,12 @@ void listarEntrenamientoPorIDUsuario (int id){
     }
     fclose(p);
     }
-    else error ("No se encontro el usuario");
+    else error ("No se encontro al usuario");
     return;
 }
 
 void listarEntrenamientos(){
-    int cant = cantidadEntrenamientos();
+    int cant = contarRegistros(PATH_ENTRENAMIENTOS,sizeof(entrenamientos));
     if (cant == 0)
     {
         error("No hay entrenamientos cargados");
@@ -333,18 +331,4 @@ int buscarEntrenamiento(int id)
         i++;
     }
     return -1;
-}
-
-int cantidadEntrenamientos()
-{
-    int cant, bytes;
-    FILE *p;
-    p = fopen(PATH_ENTRENAMIENTOS, "rb");
-    if (p == NULL)
-        return 0;
-    fseek(p, 0, SEEK_END);
-    bytes = ftell(p);
-    cant = bytes / sizeof(entrenamientos);
-    fclose(p);
-    return cant;
 }

@@ -11,6 +11,9 @@ struct usuario
     bool estado = true;
 };
 
+static const char *PATH_USUARIO = "../datos/usuario.dat";
+
+
 usuario leerUsuario(int pos);
 int buscarUsuario(int id);
 void listarUsuario(usuario mostrar);
@@ -26,5 +29,4 @@ void modificacionUsuario(int id);
 void listarUsuarioPorID(int id);
 void listarUsuarios ();
 void eliminarUsuario (int id);
-int cantidadUsuarios();
 bool getAptoMedico(int id);

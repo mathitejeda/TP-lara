@@ -5,7 +5,6 @@
 #include "verifier.h"
 #include "funciones.h"
 
-const char *PATH_USUARIO = "../datos/usuario.dat";
 
 usuario leerUsuario(int pos)
 {
@@ -59,7 +58,9 @@ void listarUsuario(usuario mostrar)
 
 bool cargarUsuario(usuario *ref)
 {
-    ref->ID = cantidadUsuarios() + 1;
+    std::cout << "Ingrese el id del usuario: ";
+    std::cin >> ref->ID;
+    std::cin.ignore();
     std::cout << "Ingrese el nombre: ";
     std::cin.getline(ref->nombres, 50);
     while (!verificarNombre(ref->nombres))
@@ -272,7 +273,7 @@ void listarUsuarioPorID(int id)
 
 void listarUsuarios()
 {
-    int cant = cantidadUsuarios();
+    int cant = contarRegistros(PATH_USUARIO,sizeof(usuario));
     if (cant == 0)
     {
         error("No hay usuarios");
@@ -297,9 +298,11 @@ void listarUsuarios()
     fclose(p);
     for (int i = 0; i < cant; i++)
     {
+        if(listar->estado){
         std::cout << ".............................." << std::endl;
         listarUsuario(listar[i]);
         std::cout << std::endl;
+        }
     }
     free(listar);
 }
@@ -340,20 +343,6 @@ void eliminarUsuario(int id)
             break;
         }
     }
-}
-
-int cantidadUsuarios()
-{
-    int cant, bytes;
-    FILE *p;
-    p = fopen(PATH_USUARIO, "rb");
-    if (p == NULL)
-        return 0;
-    fseek(p, 0, SEEK_END);
-    bytes = ftell(p);
-    cant = bytes / sizeof(usuario);
-    fclose(p);
-    return cant;
 }
 
 bool getAptoMedico(int id)
