@@ -49,9 +49,10 @@ void masCaloriasQuemadas()
         }
         else
         {
-            if (caloriasMaximas < caloriasActuales)
+            if (caloriasMaximas < caloriasActuales){
             caloriasMaximas = caloriasActuales;
             posMaximas = i;
+            }
         }
     }
     mamadisimo = leerUsuario (posMaximas);
