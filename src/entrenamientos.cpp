@@ -194,10 +194,13 @@ const char* nombreActividad(int actividad){
         return "Bicicleta";
         break;
     case 4:
-        return "Natación";
+        return "Natacion";
         break;
     case 5:
         return "Pesas";
+        break;
+    case 0:
+        return " ";
         break;
     default:
         return "error";

@@ -205,6 +205,8 @@ void submenuReportes()
         cout << "...................." << endl;
         cout << "1) Usuarios por rango de peso" << endl;
         cout << "2)Mayores calorias quemadas" << endl;
+        cout << "3)Usuarios cuya altura supere promedio B" << endl;
+        cout << "4)Actividades por perfil" << endl;
         cout << "...................." << endl;
         cout << "0)SALIR DEL PROGRAMA" << endl;
         cout << "Ingrese una opcion: ";
@@ -227,6 +229,15 @@ void submenuReportes()
             masCaloriasQuemadas();
             anykey();
             break;
+        case 3:
+            cls();
+            mayorPromedioTipoB();
+            anykey();
+            break;
+        case 4:
+            cls();
+            actividadesPorPerfil();
+            anykey();
         case 0:
             cls();
             cout << "Volviendo al menú principal";
